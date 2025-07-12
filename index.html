@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                   فق <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
@@ -112,13 +112,13 @@
         .tasks-btn {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 15px;
+            padding: 6px 12px;
+            border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-light);
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.9em;
+            font-size: 0.8em;
             font-weight: 500;
         }
 
@@ -127,8 +127,79 @@
             transform: translateY(-2px);
         }
 
+        .menu-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            min-width: 150px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            margin-top: 8px;
+        }
+
+        .menu-dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .menu-item {
+            padding: 12px 16px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-item:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .menu-item:last-child {
+            border-radius: 0 0 12px 12px;
+        }
+
+        .menu-item i {
+            font-size: 1.1em;
+            color: var(--primary-color);
+        }
+
         .logo {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
             background: var(--gradient-3);
             -webkit-background-clip: text;
@@ -139,7 +210,7 @@
         .balance-display {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
@@ -151,10 +222,10 @@
         .balance-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 6px 12px;
-            border-radius: 15px;
+            padding: 5px 10px;
+            border-radius: 12px;
             font-weight: 500;
-            font-size: 0.9em;
+            font-size: 0.8em;
             box-shadow: 0 2px 10px rgba(0, 212, 255, 0.2);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -166,35 +237,22 @@
             background: rgba(255, 255, 255, 0.15);
         }
 
-        .currency-toggle {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            color: var(--text-light);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .currency-toggle:hover {
-            background: var(--primary-color);
-            color: var(--bg-dark);
-        }
+        
 
         .withdraw-btn {
             background: var(--gradient-2);
             border: none;
             color: var(--text-light);
-            padding: 8px 16px;
-            border-radius: 15px;
-            font-size: 0.9em;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-left: 10px;
+            margin-left: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .withdraw-btn:hover {
@@ -224,8 +282,8 @@
         }
 
         .profile-image {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             margin: 0 auto 30px;
             background: var(--gradient-2);
@@ -849,19 +907,26 @@
                 <button class="tasks-btn" onclick="openTasksModal()">
                     <i class="fas fa-tasks"></i> Tasks
                 </button>
-                <button class="withdraw-btn" onclick="openWithdrawModal()">
-                    <i class="fas fa-money-bill-wave"></i>
-                    Withdraw
-                </button>
                 <div class="balance-display" onclick="toggleCurrency()">
                     <div class="balance-card">
                         <span id="balance-amount">5.00</span>
                         <span id="currency-symbol">EGP</span>
+                        <i class="fas fa-exchange-alt" style="margin-left: 6px; font-size: 0.7em; opacity: 0.7;"></i>
                     </div>
-                    <button class="currency-toggle" onclick="toggleCurrency(event)">
-                        <i class="fas fa-exchange-alt"></i>
-                    </button>
                 </div>
+                <button class="menu-btn" onclick="toggleMenu()">
+                    <i class="fas fa-ellipsis-v"></i>
+                    <div class="menu-dropdown" id="menuDropdown">
+                        <div class="menu-item" onclick="openWithdrawModal()">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <span>Withdraw</span>
+                        </div>
+                        <div class="menu-item" onclick="shareWebsite()">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Share Website</span>
+                        </div>
+                    </div>
+                </button>
             </div>
         </div>
     </header>
@@ -872,7 +937,7 @@
         <section class="hero">
             <div class="hero-3d">
                 <div class="profile-image">
-                    <img src="./attached_assets/c3c247c3-8ff8-41dc-bb65-1e8f38945bc7_1752305749023.jpg" alt="Ahmed Shawky" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    <img src="./me.jpg" alt="Ahmed Shawky" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                 </div>
                 <h1>Ahmed Shawky</h1>
                 <p>Creative Programmer • Born 2008 • High School Student</p>
@@ -913,7 +978,7 @@
                 <!-- SIMPLE Project -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="./attached_assets/Picsart_25-02-26_00-21-42-951_1752305749021.jpg" alt="SIMPLE Project">
+                        <img src="./simple.jpg" alt="SIMPLE Project">
                     </div>
                     <div class="project-header">
                         <div class="project-logo">
@@ -933,7 +998,7 @@
                 <!-- POPAY Project -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="./attached_assets/images_1752305749024.jpg" alt="POPAY Project">
+                        <img src="./popeye.jpg" alt="POPAY Project">
                     </div>
                     <div class="project-header">
                         <div class="project-logo">
@@ -1120,10 +1185,69 @@
         }
 
         // Toggle currency
-        function toggleCurrency(event) {
-            event.stopPropagation();
+        function toggleCurrency() {
             currency = currency === 'EGP' ? 'USD' : 'EGP';
             updateBalanceDisplay();
+        }
+
+        // Toggle menu dropdown
+        function toggleMenu() {
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.toggle('show');
+            
+            // Close menu when clicking outside
+            if (dropdown.classList.contains('show')) {
+                document.addEventListener('click', closeMenuOnOutsideClick);
+            }
+        }
+
+        // Close menu when clicking outside
+        function closeMenuOnOutsideClick(event) {
+            const menuBtn = document.querySelector('.menu-btn');
+            const dropdown = document.getElementById('menuDropdown');
+            
+            if (!menuBtn.contains(event.target)) {
+                dropdown.classList.remove('show');
+                document.removeEventListener('click', closeMenuOnOutsideClick);
+            }
+        }
+
+        // Share website function
+        function shareWebsite() {
+            const websiteUrl = 'https://ahmedmehleb1.github.io/1/';
+            
+            // Close menu dropdown
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.remove('show');
+            document.removeEventListener('click', closeMenuOnOutsideClick);
+            
+            // Check if Web Share API is supported
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Ahmed Shawky - Programmer & Web Developer',
+                    text: 'Check out Ahmed Shawky\'s portfolio website!',
+                    url: websiteUrl
+                }).then(() => {
+                    showNotification('Website shared successfully!', 'success');
+                }).catch((error) => {
+                    console.log('Error sharing:', error);
+                    fallbackShare(websiteUrl);
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                fallbackShare(websiteUrl);
+            }
+        }
+
+        // Fallback share function
+        function fallbackShare(url) {
+            // Copy to clipboard
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Website link copied to clipboard!', 'success');
+            }).catch(() => {
+                // If clipboard API fails, show the URL in a prompt
+                prompt('Copy this link to share the website:', url);
+            });
         }
 
         // Initialize countdown timers
@@ -1180,6 +1304,11 @@
         function openWithdrawModal() {
             document.getElementById('withdrawModal').style.display = 'block';
             checkWithdrawAmount(); // Check initial amount
+            
+            // Close menu dropdown
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.remove('show');
+            document.removeEventListener('click', closeMenuOnOutsideClick);
         }
 
         // Close withdraw modal
