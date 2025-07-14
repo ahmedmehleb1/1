@@ -82,6 +82,16 @@
             50% { transform: translateY(-20px) rotate(180deg); }
         }
 
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
         /* Header */
         .header {
             position: fixed;
@@ -97,16 +107,46 @@
 
         .header-content {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-top-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-top-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
         }
 
         .header-right {
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .header-bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-top: 8px;
         }
 
         .tasks-btn {
@@ -160,7 +200,7 @@
             visibility: hidden;
             transform: translateY(-10px);
             transition: all 0.3s ease;
-            z-index: 1001;
+            z-index: 9999;
             margin-top: 8px;
         }
 
@@ -286,7 +326,7 @@
             height: 150px;
             border-radius: 50%;
             margin: 0 auto 30px;
-            background: var(--gradient-2);
+            background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -295,6 +335,13 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             position: relative;
             overflow: hidden;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
         }
 
         .profile-image::before {
@@ -321,6 +368,7 @@
         .hero h1 {
             font-size: 3.5em;
             margin-bottom: 20px;
+            margin-top: 60px;
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -337,6 +385,90 @@
             font-size: 1.2em;
             color: var(--text-gray);
             margin-bottom: 30px;
+        }
+
+        /* Instagram Posts Section */
+        .instagram-posts {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .instagram-posts h3 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .instagram-grid {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .instagram-post {
+            background: var(--bg-card);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .instagram-post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .instagram-post-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .instagram-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-post:hover .instagram-post-image img {
+            transform: scale(1.05);
+        }
+
+        .instagram-post-content {
+            padding: 15px;
+        }
+
+        .instagram-post-text {
+            font-size: 0.9em;
+            color: var(--text-gray);
+            line-height: 1.5;
+            margin-bottom: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .instagram-post-date {
+            font-size: 0.8em;
+            color: var(--text-gray);
+            opacity: 0.7;
+        }
+
+        .instagram-icon {
+            color: #E4405F;
+            font-size: 1.2em;
+            margin-right: 8px;
         }
 
         /* About Section */
@@ -577,7 +709,7 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 2000;
+            z-index: 10000;
             left: 0;
             top: 0;
             width: 100%;
@@ -747,37 +879,78 @@
             right: 30px;
             background: var(--gradient-2);
             color: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
             z-index: 3000;
             transform: translateX(400px);
-            transition: all 0.3s ease;
-            max-width: 300px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            max-width: 350px;
+            min-width: 280px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .notification.show {
             transform: translateX(0);
+            animation: slideInNotification 0.4s ease-out;
+        }
+
+        @keyframes slideInNotification {
+            0% {
+                transform: translateX(400px) scale(0.8);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0) scale(1);
+                opacity: 1;
+            }
         }
 
         .notification-header {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
+            gap: 12px;
+            margin-bottom: 15px;
         }
 
         .notification-icon {
-            font-size: 1.5em;
+            font-size: 1.8em;
+            animation: iconPulse 2s infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
         .notification-title {
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1em;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .notification-message {
-            font-size: 0.9em;
-            opacity: 0.9;
+            font-size: 1em;
+            line-height: 1.5;
+            opacity: 0.95;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            white-space: pre-line;
+        }
+
+        .notification.error {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            animation: errorShake 0.6s ease-out;
+        }
+
+        .notification.success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         /* Email Button */
@@ -832,15 +1005,157 @@
             70% { transform: translateY(-5px); }
         }
 
-        /* Responsive Design */
+        /* Enhanced Mobile Responsiveness */
         @media (max-width: 768px) {
             .header-content {
-                flex-direction: column;
-                gap: 15px;
+                gap: 10px;
+            }
+
+            .header-top {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .header-top-left {
+                order: 1;
+            }
+
+            .header-top-right {
+                order: 2;
+            }
+
+            .login-container {
+                padding: 20px;
+                width: 95%;
+                max-height: 90vh;
+                margin: 10px;
+            }
+
+            .login-logo {
+                width: 80px;
+                height: 80px;
+                font-size: 2em;
+            }
+
+            .login-title {
+                font-size: 1.8em;
+                margin-bottom: 12px;
+            }
+
+            .login-subtitle {
+                font-size: 1em;
+                margin-bottom: 25px;
+            }
+
+            .input-field {
+                padding: 12px 15px 12px 45px;
+                font-size: 14px;
+            }
+
+            .input-icon {
+                left: 15px;
+                font-size: 1.1em;
+            }
+
+            .error-message {
+                padding: 12px;
+                font-size: 0.9em;
+                margin: 12px 0;
+            }
+
+            .login-btn, .register-btn {
+                padding: 12px;
+                font-size: 16px;
             }
 
             .hero h1 {
                 font-size: 2.5em;
+                margin-top: 40px;
+            }
+
+            .instagram-grid {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .instagram-post {
+                max-width: 280px;
+            }
+
+            .instagram-post-image {
+                height: 150px;
+            }
+
+            .instagram-posts h3 {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Additional mobile styles for very small screens */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 15px;
+                width: 98%;
+                max-height: 95vh;
+                border-radius: 20px;
+            }
+
+            .login-logo {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8em;
+                margin: 0 auto 20px;
+            }
+
+            .login-title {
+                font-size: 1.6em;
+                margin-bottom: 10px;
+            }
+
+            .login-subtitle {
+                font-size: 0.9em;
+                margin-bottom: 20px;
+            }
+
+            .input-field {
+                padding: 10px 12px 10px 40px;
+                font-size: 14px;
+            }
+
+            .input-icon {
+                left: 12px;
+                font-size: 1em;
+            }
+
+            .error-message {
+                padding: 10px;
+                font-size: 0.85em;
+                margin: 10px 0;
+                border-radius: 10px;
+            }
+
+            .login-btn, .register-btn {
+                padding: 10px;
+                font-size: 15px;
+                border-radius: 12px;
+            }
+
+            .captcha-container {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .captcha-input {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .hero h1 {
+                font-size: 2em;
             }
 
             .projects-grid {
@@ -854,6 +1169,71 @@
 
             .main-content {
                 padding: 20px 15px;
+                margin-top: 120px;
+            }
+
+            .share-container {
+                padding: 25px 20px;
+                max-width: 95%;
+                margin: 10px;
+            }
+
+            .social-share-links {
+                gap: 10px;
+            }
+
+            /* Success Modal Mobile Optimization */
+            .success-container {
+                padding: 30px 20px;
+                max-width: 350px;
+                width: 95%;
+                margin: 10px;
+            }
+
+            .success-title {
+                font-size: 1.5em;
+                margin-bottom: 12px;
+            }
+
+            .success-message {
+                font-size: 0.9em;
+                margin-bottom: 25px;
+            }
+
+            .user-credentials {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+
+            .credential-item {
+                flex-direction: column;
+                gap: 8px;
+                margin-bottom: 15px;
+            }
+
+            .credential-label {
+                font-size: 0.9em;
+            }
+
+            .credential-value {
+                font-size: 1.1em;
+            }
+
+            .download-actions {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .download-btn {
+                width: 100%;
+                padding: 12px;
+                font-size: 0.9em;
+            }
+
+            .continue-btn {
+                width: 100%;
+                padding: 15px;
+                font-size: 1em;
             }
         }
 
@@ -889,6 +1269,1254 @@
             margin-bottom: 10px;
             font-size: 1.1em;
         }
+
+        /* Login Modal Styles */
+        .login-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .login-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 400px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        /* Enhanced input validation styles */
+        .input-field.error {
+            border-color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .input-field.success {
+            border-color: #4facfe;
+            background: rgba(79, 172, 254, 0.1);
+            box-shadow: 0 0 15px rgba(79, 172, 254, 0.3);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        /* Enhanced error message styling */
+        .error-message {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: none;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.3);
+            animation: slideDownError 0.3s ease-out;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .error-message::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #ff6b6b;
+        }
+
+        @keyframes slideDownError {
+            from { 
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to { 
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced button states */
+        .login-btn.loading {
+            background: linear-gradient(135deg, #666 0%, #888 100%);
+            cursor: not-allowed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: loading-shimmer 1.5s infinite;
+        }
+
+        @keyframes loading-shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .login-btn.error {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            animation: buttonError 0.5s ease-in-out;
+        }
+
+        @keyframes buttonError {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .login-header {
+            margin-bottom: 40px;
+        }
+
+        .login-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 25px;
+            background: var(--gradient-3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: white;
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 20px 50px rgba(0, 212, 255, 0.6); }
+        }
+
+        .login-title {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-subtitle {
+            color: var(--text-gray);
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+
+        .login-form {
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-light);
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-gray);
+            font-size: 1.2em;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 15px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .register-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .close-login {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-login:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* CAPTCHA Styles */
+        .captcha-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .captcha-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .captcha-shield {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .captcha-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .captcha-challenge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .captcha-question {
+            font-size: 1.1em;
+            color: var(--text-gray);
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .captcha-input {
+            width: 60px;
+            padding: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .captcha-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .captcha-refresh {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .captcha-refresh:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .captcha-status {
+            margin-top: 10px;
+            font-size: 0.9em;
+            padding: 8px 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .captcha-status.success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4caf50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .captcha-status.error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+        
+        /* Image Upload Button Styles */
+        .image-upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .image-upload-btn {
+            width: 60px;
+            height: 60px;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .image-upload-btn:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 212, 255, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .image-upload-btn i {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-btn:hover i {
+            color: var(--primary-color);
+        }
+        
+        .image-upload-btn.has-image {
+            border: 2px solid var(--primary-color);
+            background: transparent;
+        }
+        
+        .image-upload-btn.has-image i {
+            display: none;
+        }
+        
+        .uploaded-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .image-upload-input {
+            display: none;
+        }
+        
+        .image-upload-label {
+            font-size: 0.85em;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        /* Success Modal Styles */
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10001;
+        }
+
+        .success-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-container {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            animation: successPulse 1.5s ease;
+        }
+
+        @keyframes successPulse {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .success-title {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .success-message {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .user-credentials {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .credential-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .credential-label {
+            font-weight: 500;
+            color: var(--text-gray);
+        }
+
+        .credential-value {
+            font-family: 'Courier New', monospace;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .download-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .download-image-btn {
+            background: var(--gradient-2);
+            color: white;
+        }
+
+        .download-text-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* User Profile Styles */
+        .user-profile {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .user-profile:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .user-avatar-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .user-status {
+            font-size: 0.8em;
+            color: var(--text-gray);
+        }
+
+        .login-btn-header {
+            background: var(--gradient-1);
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .login-btn-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .logged-in-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-profile-center {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Share Modal Styles */
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .share-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .share-container {
+            background: var(--bg-card);
+            border-radius: 25px;
+            padding: 35px;
+            max-width: 480px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .share-header {
+            margin-bottom: 30px;
+        }
+
+        .share-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            box-shadow: 0 10px 30px rgba(249, 63, 251, 0.3);
+        }
+
+        .share-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .share-description {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .referral-info {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .referral-reward {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .referral-text {
+            color: var(--text-gray);
+            font-size: 0.9em;
+        }
+
+        .url-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .url-input {
+            flex: 1;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 0.9em;
+            outline: none;
+            font-family: 'Courier New', monospace;
+        }
+
+        .copy-btn {
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .share-social {
+            margin-bottom: 20px;
+        }
+
+        .share-social h4 {
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+
+        .social-share-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-share-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .social-share-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .share-facebook {
+            background: #1877f2;
+        }
+
+        .share-twitter {
+            background: #1da1f2;
+        }
+
+        .share-whatsapp {
+            background: #25d366;
+        }
+
+        .share-telegram {
+            background: #0088cc;
+        }
+
+        .share-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-close:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Account Edit Modal Styles */
+        .account-edit-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .account-edit-modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .account-edit-content {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .account-edit-title {
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .account-edit-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .account-field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .account-field label {
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        .account-field input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: var(--text-light);
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .account-field input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .avatar-upload-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            margin: 0 auto 20px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .avatar-preview:hover {
+            transform: scale(1.05);
+        }
+
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .avatar-preview-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            font-weight: 600;
+            color: white;
+        }
+
+        .upload-avatar-btn {
+            background: var(--gradient-2);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 auto;
+        }
+
+        .upload-avatar-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .account-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .save-account-btn {
+            flex: 1;
+            background: var(--gradient-1);
+            border: none;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .save-account-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .cancel-account-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .cancel-account-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .account-edit-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .account-edit-close:hover {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        /* Welcome Messages Styles */
+        .welcome-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 3000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .welcome-overlay.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .welcome-container {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .welcome-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .welcome-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: var(--gradient-3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .welcome-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-message {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 4px solid var(--primary-color);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .welcome-message p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .welcome-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-arrow {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .nav-arrow:hover:not(:disabled) {
+            background: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .welcome-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .welcome-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .welcome-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .btn-skip {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-skip:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-next {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-start {
+            background: var(--gradient-2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-start:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -902,31 +2530,65 @@
     <!-- Header -->
     <header class="header">
         <div class="header-content">
-            <div class="logo">Ahmed Shawky</div>
-            <div class="header-right">
-                <button class="tasks-btn" onclick="openTasksModal()">
-                    <i class="fas fa-tasks"></i> Tasks
+            <!-- المستوى الأول: Ahmed Shawky -->
+            <div class="header-top">
+                <div class="header-top-left">
+                    <div class="logo">Ahmed Shawky</div>
+                </div>
+                <div class="header-top-right">
+                    <button class="menu-btn" onclick="toggleMenu()">
+                        <i class="fas fa-ellipsis-v"></i>
+                        <div class="menu-dropdown" id="menuDropdown">
+                            <div class="menu-item" id="withdrawItem" onclick="openWithdrawModal()" style="display: none;">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <span>Withdraw</span>
+                            </div>
+                            <div class="menu-item" onclick="openShareModal()">
+                                <i class="fas fa-share-alt"></i>
+                                <span>Share Website</span>
+                            </div>
+                            <div class="menu-item" id="logoutItem" onclick="logout()" style="display: none;">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>تسجيل الخروج</span>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- المستوى الثاني: القائمة والأموال وزر المهام -->
+            <div class="header-center">
+                <button class="login-btn-header" id="loginBtnHeader" onclick="openLoginModal()">
+                    <i class="fas fa-user"></i> تسجيل الدخول
                 </button>
-                <div class="balance-display" onclick="toggleCurrency()">
-                    <div class="balance-card">
-                        <span id="balance-amount">5.00</span>
-                        <span id="currency-symbol">EGP</span>
-                        <i class="fas fa-exchange-alt" style="margin-left: 6px; font-size: 0.7em; opacity: 0.7;"></i>
+                
+                <!-- محتوى المستخدم المسجل (الوسط) -->
+                <div class="logged-in-content" id="loggedInContent" style="display: none;">
+                    <button class="tasks-btn" onclick="openTasksModal()">
+                        <i class="fas fa-tasks"></i> المهام
+                    </button>
+                    <div class="balance-display" onclick="toggleCurrency()">
+                        <div class="balance-card">
+                            <span id="balance-amount">0.00</span>
+                            <span id="currency-symbol">EGP</span>
+                            <i class="fas fa-exchange-alt" style="margin-left: 6px; font-size: 0.7em; opacity: 0.7;"></i>
+                        </div>
                     </div>
                 </div>
-                <button class="menu-btn" onclick="toggleMenu()">
-                    <i class="fas fa-ellipsis-v"></i>
-                    <div class="menu-dropdown" id="menuDropdown">
-                        <div class="menu-item" onclick="openWithdrawModal()">
-                            <i class="fas fa-money-bill-wave"></i>
-                            <span>Withdraw</span>
-                        </div>
-                        <div class="menu-item" onclick="shareWebsite()">
-                            <i class="fas fa-share-alt"></i>
-                            <span>Share Website</span>
-                        </div>
+            </div>
+
+            <!-- المستوى الثالث: الحساب المسجل -->
+            <div class="header-bottom">
+                <div class="user-profile" id="userProfile" style="display: none;" onclick="openAccountEditModal()">
+                    <div class="user-avatar" id="userAvatar">
+                        <img id="userAvatarImg" style="display: none;">
+                        <div class="user-avatar-text" id="userAvatarText">A</div>
                     </div>
-                </button>
+                    <div class="user-info">
+                        <div class="user-name" id="userName">Ahmed Shawky</div>
+                        <div class="user-status">مطور مواقع</div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -937,8 +2599,24 @@
         <section class="hero">
             <div class="hero-3d">
                 <div class="profile-image">
-                    <img src="./me.jpg" alt="Ahmed Shawky" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                    <img src="re-logo.png" alt="RE Logo" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
                 </div>
+                
+                <!-- Instagram Posts Section -->
+                <div class="instagram-posts">
+                    <h3><i class="fab fa-instagram instagram-icon"></i>Latest Instagram Posts</h3>
+                    <div class="instagram-grid">
+                        <div class="instagram-post" onclick="openInstagramPost('https://www.instagram.com/p/C6CxLgyI-xb/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==')">
+                            <div class="instagram-post-image">
+                                <img src="attached_assets/c3c247c3-8ff8-41dc-bb65-1e8f38945bc7_1752305451657_1752466556410.jpg" alt="Instagram Post">
+                            </div>
+                            <div class="instagram-post-content">
+                                <p class="instagram-post-date">April 2024</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <h1>Ahmed Shawky</h1>
                 <p>Creative Programmer • Born 2008 • High School Student</p>
                 <p>Specializing in Modern Web Development & Applications</p>
@@ -978,7 +2656,7 @@
                 <!-- SIMPLE Project -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="./simple.jpg" alt="SIMPLE Project">
+                        <img src="simple-logo.jpg" alt="Simple Logo" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="project-header">
                         <div class="project-logo">
@@ -998,7 +2676,7 @@
                 <!-- POPAY Project -->
                 <div class="project-card">
                     <div class="project-image">
-                        <img src="./popeye.jpg" alt="POPAY Project">
+                        <img src="popeye-logo.png" alt="Popeye Logo" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <div class="project-header">
                         <div class="project-logo">
@@ -1021,7 +2699,7 @@
         <section class="social-media">
             <h2>Connect With Me</h2>
             <div class="social-links">
-                <a href="https://facebook.com/ahmed.mehleb" class="social-link facebook" target="_blank">
+                <a href="https://www.facebook.com/share/1FS6k1egWr/" class="social-link facebook" target="_blank">
                     <i class="fab fa-facebook-f"></i>
                     <span>Facebook</span>
                 </a>
@@ -1054,34 +2732,24 @@
                 <div class="payment-methods">
                     <div class="payment-method" onclick="selectPaymentMethod('vodafone')">
                         <div class="payment-logo" style="background: #e60012; padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="45" fill="white"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#e60012" font-family="Arial, sans-serif" font-weight="bold" font-size="24">V</text>
-                                <path d="M30 30 Q50 45 70 30" stroke="#e60012" stroke-width="3" fill="none"/>
-                                <path d="M30 70 Q50 55 70 70" stroke="#e60012" stroke-width="3" fill="none"/>
-                            </svg>
+                            <img src="vodafone-logo.png" alt="Vodafone Cash" style="width: 40px; height: 40px; object-fit: contain;">
                         </div>
                         <span>Vodafone Cash</span>
                     </div>
                     <div class="payment-method" onclick="selectPaymentMethod('we')">
                         <div class="payment-logo" style="background: #7b2cbf; padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
                             <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="45" fill="white"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#7b2cbf" font-family="Arial, sans-serif" font-weight="bold" font-size="20">WE</text>
-                                <rect x="25" y="25" width="50" height="4" rx="2" fill="#7b2cbf"/>
-                                <rect x="25" y="71" width="50" height="4" rx="2" fill="#7b2cbf"/>
+                                <rect x="10" y="10" width="80" height="80" rx="15" fill="white"/>
+                                <text x="50" y="58" text-anchor="middle" fill="#7b2cbf" font-family="Arial, sans-serif" font-weight="bold" font-size="18">WE</text>
+                                <rect x="20" y="20" width="60" height="3" rx="1.5" fill="#7b2cbf"/>
+                                <rect x="20" y="77" width="60" height="3" rx="1.5" fill="#7b2cbf"/>
                             </svg>
                         </div>
                         <span>WE Cash</span>
                     </div>
                     <div class="payment-method" onclick="selectPaymentMethod('orange')">
                         <div class="payment-logo" style="background: #ff6900; padding: 10px; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
-                            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="50" cy="50" r="45" fill="white"/>
-                                <circle cx="50" cy="50" r="35" fill="#ff6900"/>
-                                <circle cx="50" cy="50" r="25" fill="white"/>
-                                <text x="50" y="58" text-anchor="middle" fill="#ff6900" font-family="Arial, sans-serif" font-weight="bold" font-size="10">Orange</text>
-                            </svg>
+                            <img src="company-logo.png" alt="Orange Cash" style="width: 40px; height: 40px; object-fit: contain;">
                         </div>
                         <span>Orange Cash</span>
                     </div>
@@ -1131,56 +2799,933 @@
             </div>
             <div id="email-content">
                 <div class="notification-message">
-                    <h4>🎉 Welcome to the Website!</h4>
-                    <p>5 EGP has been added to your account as a welcome bonus.</p>
-                    <p>Minimum withdrawal amount is 99 EGP.</p>
+                    <h4>🎉 مرحباً بك في الموقع!</h4>
+                    <p>نرحب بك في موقع أحمد شوقي للبرمجة وتطوير المواقع.</p>
+                    <p>يمكنك الآن استكشاف مشاريعنا والتواصل معنا.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Notification -->
-    <div id="notification" class="notification">
-        <div class="notification-header">
-            <i class="fas fa-bell notification-icon"></i>
-            <span class="notification-title">New Notification</span>
+
+
+    <!-- Login Modal -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-container">
+            <button class="close-login" onclick="closeLoginModal()">&times;</button>
+            
+            <div class="login-header">
+                <div class="login-logo">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h2 class="login-title">أهلاً وسهلاً</h2>
+                <p class="login-subtitle">سجل دخولك للوصول إلى حسابك</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <!-- Error Message Container -->
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorText">رسالة الخطأ</span>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" class="input-field" id="loginUsername" placeholder="اسم المستخدم" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" class="input-field" id="loginPassword" placeholder="كلمة المرور" required>
+                </div>
+                
+                <!-- Image Upload Container (only shown during registration) -->
+                <div class="image-upload-container" id="imageUploadContainer" style="display: none;">
+                    <div class="image-upload-btn" onclick="triggerImageUpload()">
+                        <i class="fas fa-camera"></i>
+                        <img id="previewImage" class="uploaded-image" style="display: none;">
+                    </div>
+                    <div class="image-upload-label">إضافة صورة للحساب (اختياري)</div>
+                    <input type="file" id="imageUploadInput" class="image-upload-input" accept="image/*" onchange="handleImageUpload(this)">
+                </div>
+                
+                <!-- CAPTCHA Container (only shown during registration) -->
+                <div class="captcha-container" id="captchaContainer" style="display: none;">
+                    <div class="captcha-header">
+                        <div class="captcha-shield">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="captcha-title">التحقق من أنك لست روبوت</div>
+                    </div>
+                    
+                    <div class="captcha-challenge">
+                        <div class="captcha-question" id="captchaQuestion">5 + 3 = ?</div>
+                        <input type="number" class="captcha-input" id="captchaInput" placeholder="؟" min="0" max="20">
+                        <button type="button" class="captcha-refresh" onclick="generateNewCaptcha()">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="captcha-status" id="captchaStatus" style="display: none;"></div>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                </button>
+                
+                <button type="button" class="register-btn" onclick="showRegisterForm()">
+                    <i class="fas fa-user-plus"></i> إنشاء حساب جديد
+                </button>
+            </form>
         </div>
-        <div class="notification-message" id="notification-message">
-            5 EGP has been added to your account as a welcome bonus!
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-container">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            
+            <h3 class="success-title">تم إنشاء الحساب بنجاح!</h3>
+            <p class="success-message">مرحباً بك! تم إنشاء حسابك بنجاح. إليك بيانات تسجيل الدخول الخاصة بك:</p>
+            
+            <div class="user-credentials" id="userCredentials">
+                <div class="credential-item">
+                    <span class="credential-label">اسم المستخدم:</span>
+                    <span class="credential-value" id="generatedUsername">user123</span>
+                </div>
+                <div class="credential-item">
+                    <span class="credential-label">كلمة المرور:</span>
+                    <span class="credential-value" id="generatedPassword">pass123</span>
+                </div>
+            </div>
+            
+            <div class="download-actions">
+                <button class="download-btn download-image-btn" onclick="downloadAsImage()">
+                    <i class="fas fa-image"></i> تحميل كصورة
+                </button>
+                <button class="download-btn download-text-btn" onclick="downloadAsText()">
+                    <i class="fas fa-copy"></i> نسخ البيانات
+                </button>
+            </div>
+            
+            <button class="continue-btn" onclick="continueToWebsite()">
+                <i class="fas fa-arrow-right"></i> المتابعة إلى الموقع
+            </button>
+        </div>
+    </div>
+
+    <!-- Account Edit Modal -->
+    <div id="accountEditModal" class="account-edit-modal">
+        <div class="account-edit-content">
+            <button class="account-edit-close" onclick="closeAccountEditModal()">&times;</button>
+            
+            <h2 class="account-edit-title">تعديل الحساب</h2>
+            
+            <form class="account-edit-form" onsubmit="saveAccountChanges(event)">
+                <!-- Avatar Upload Section -->
+                <div class="avatar-upload-section">
+                    <div class="avatar-preview" id="avatarPreview" onclick="selectAvatarImage()">
+                        <img id="avatarPreviewImg" style="display: none;">
+                        <div class="avatar-preview-text" id="avatarPreviewText">A</div>
+                    </div>
+                    <button type="button" class="upload-avatar-btn" onclick="selectAvatarImage()">
+                        <i class="fas fa-camera"></i> تغيير الصورة
+                    </button>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display: none;" onchange="handleAvatarUpload(this)">
+                </div>
+
+                <!-- Username Field -->
+                <div class="account-field">
+                    <label for="editUsername">اسم المستخدم</label>
+                    <input type="text" id="editUsername" name="username" required>
+                </div>
+
+                <!-- Display Name Field -->
+                <div class="account-field">
+                    <label for="editDisplayName">الاسم المعروض</label>
+                    <input type="text" id="editDisplayName" name="displayName" placeholder="أحمد شوقي">
+                </div>
+
+                <!-- Status Field -->
+                <div class="account-field">
+                    <label for="editStatus">الوصف</label>
+                    <input type="text" id="editStatus" name="status" placeholder="مطور مواقع">
+                </div>
+
+                <!-- Email Field -->
+                <div class="account-field">
+                    <label for="editEmail">البريد الإلكتروني</label>
+                    <input type="email" id="editEmail" name="email" placeholder="ahmed@example.com">
+                </div>
+
+                <!-- Password Field -->
+                <div class="account-field">
+                    <label for="editPassword">كلمة المرور الجديدة (اختياري)</label>
+                    <input type="password" id="editPassword" name="password" placeholder="اتركه فارغًا لعدم التغيير">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="account-actions">
+                    <button type="submit" class="save-account-btn">
+                        <i class="fas fa-save"></i> حفظ التغييرات
+                    </button>
+                    <button type="button" class="cancel-account-btn" onclick="closeAccountEditModal()">
+                        <i class="fas fa-times"></i> إلغاء
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="shareModal" class="share-modal">
+        <div class="share-container">
+            <button class="share-close" onclick="closeShareModal()">&times;</button>
+            
+            <div class="share-header">
+                <div class="share-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <h3 class="share-title" id="shareTitle">شارك الموقع واربح!</h3>
+                <p class="share-description" id="shareDescription">شارك موقع أحمد شوقي مع أصدقائك واحصل على مكافآت مالية رائعة</p>
+            </div>
+            
+            <div class="referral-info" id="referralInfo">
+                <div class="referral-reward">🎁 اربح من 1 إلى 5 جنيه لكل إحالة!</div>
+                <div class="referral-text">عندما يسجل شخص جديد من رابطك، ستحصل على مكافأة مالية عشوائية</div>
+            </div>
+            
+            <div class="url-container">
+                <input type="text" class="url-input" value="https://ahmedmehleb1.github.io/1/" readonly id="shareUrl">
+                <button class="copy-btn" onclick="copyShareUrl()">
+                    <i class="fas fa-copy"></i> نسخ
+                </button>
+            </div>
+            
+            <div class="share-social">
+                <h4>شارك على وسائل التواصل الاجتماعي</h4>
+                <div class="social-share-links">
+                    <a href="#" class="social-share-btn share-facebook" onclick="shareOnFacebook()">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-share-btn share-twitter" onclick="shareOnTwitter()">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-share-btn share-whatsapp" onclick="shareOnWhatsApp()">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="social-share-btn share-telegram" onclick="shareOnTelegram()">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Messages Overlay -->
+    <div id="welcomeOverlay" class="welcome-overlay">
+        <div class="welcome-container">
+            <div class="welcome-header">
+                <div class="welcome-icon">
+                    <i class="fas fa-star" id="welcome-icon"></i>
+                </div>
+                <h3 class="welcome-title" id="welcome-title">مرحباً بك!</h3>
+            </div>
+            
+            <div class="welcome-message" id="welcome-message">
+                <p>أهلاً وسهلاً بك في موقع أحمد شوقي الشخصي! هنا ستجد معلومات عني وعن مشاريعي البرمجية المثيرة.</p>
+            </div>
+            
+            <div class="welcome-navigation">
+                <button class="nav-arrow" id="prevBtn" onclick="previousMessage()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="welcome-dots" id="welcomeDots">
+                    <div class="dot active" onclick="goToMessage(0)"></div>
+                    <div class="dot" onclick="goToMessage(1)"></div>
+                    <div class="dot" onclick="goToMessage(2)"></div>
+                    <div class="dot" onclick="goToMessage(3)"></div>
+                </div>
+                
+                <button class="nav-arrow" id="nextBtn" onclick="nextMessage()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            
+            <div class="welcome-actions">
+                <button class="welcome-btn btn-skip" onclick="skipWelcome()">تخطي</button>
+                <button class="welcome-btn btn-next" id="actionBtn" onclick="nextMessage()">التالي</button>
+            </div>
         </div>
     </div>
 
     <!-- Email Button -->
-    <div class="email-btn has-notification" onclick="openEmailModal()">
+    <div class="email-btn has-notification" onclick="openEmailModal()" style="display: none;" id="emailBtnFloat">
         <i class="fas fa-envelope"></i>
     </div>
 
     <script>
         // Initialize application
-        let balance = 5.00;
+        let balance = 0.00;
         let currency = 'EGP';
         let exchangeRate = 0.032; // EGP to USD
         let selectedPaymentMethod = null;
         let hasUnreadNotification = true;
+        let currentWelcomeMessage = 0;
+        let isLoggedIn = false;
+        let currentUser = null;
+        let referralEarnings = 0;
+        let currentCaptcha = { num1: 0, num2: 0, answer: 0 };
+        let captchaVerified = false;
+
+        // Welcome messages data
+        const welcomeMessages = [
+            {
+                icon: 'fas fa-star',
+                title: 'مرحباً بك!',
+                message: 'أهلاً وسهلاً بك في موقع أحمد شوقي الشخصي! هنا ستجد معلومات عني وعن مشاريعي البرمجية المثيرة.'
+            },
+            {
+                icon: 'fas fa-user',
+                title: 'من أنا؟',
+                message: 'أنا أحمد شوقي، مبرمج شاب مولود في 2008. أدرس في المرحلة الثانوية وأحب تطوير مواقع الويب والتطبيقات.'
+            },
+            {
+                icon: 'fas fa-tasks',
+                title: 'نظام المهام',
+                message: 'يمكنك إنجاز مهام مختلفة في الموقع وكسب أموال حقيقية! اضغط على زر "المهام" في الأعلى لرؤية المهام المتاحة.'
+            },
+            {
+                icon: 'fas fa-money-bill-wave',
+                title: 'السحب والأرباح',
+                message: 'بمجرد وصولك إلى 99 جنيه، يمكنك سحب أموالك عبر فودافون كاش أو WE أو أورانج كاش. ابدأ رحلتك الآن!'
+            }
+        ];
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateBalanceDisplay();
             initializeCountdowns();
-            showWelcomeNotification();
+            checkLoginStatus();
+            
+            // Initialize login form
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.onsubmit = handleLogin;
+            }
+            
+            // Add input event listeners to clear errors on typing
+            const usernameInput = document.getElementById('loginUsername');
+            const passwordInput = document.getElementById('loginPassword');
+            
+            if (usernameInput) {
+                usernameInput.addEventListener('input', function() {
+                    clearLoginError();
+                    this.classList.remove('error', 'success');
+                });
+                
+                usernameInput.addEventListener('blur', function() {
+                    if (this.value.trim().length > 0) {
+                        validateInput('loginUsername', this.value.trim().length >= 3);
+                    }
+                });
+            }
+            
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    clearLoginError();
+                    this.classList.remove('error', 'success');
+                });
+                
+                passwordInput.addEventListener('blur', function() {
+                    if (this.value.trim().length > 0) {
+                        validateInput('loginPassword', this.value.trim().length >= 6);
+                    }
+                });
+            }
+            
+            // Show welcome messages only for first-time visitors
+            if (!localStorage.getItem('welcomeShown')) {
+                showWelcomeMessages();
+            }
         });
+
+        // Check login status
+        function checkLoginStatus() {
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                isLoggedIn = true;
+                updateUIForLoggedInUser();
+            } else {
+                updateUIForLoggedOutUser();
+            }
+        }
+
+        // Update UI for logged in user
+        function updateUIForLoggedInUser() {
+            document.getElementById('loginBtnHeader').style.display = 'none';
+            document.getElementById('loggedInContent').style.display = 'flex';
+            document.getElementById('userProfile').style.display = 'flex';
+            document.getElementById('logoutItem').style.display = 'block';
+            document.getElementById('withdrawItem').style.display = 'block';
+            document.getElementById('emailBtnFloat').style.display = 'flex';
+            
+            if (currentUser) {
+                updateUserInterface();
+            }
+            updateBalanceDisplay();
+        }
+
+        // Update user interface with current user data
+        function updateUserInterface() {
+            if (!currentUser) return;
+            
+            const displayName = currentUser.displayName || currentUser.username;
+            const status = currentUser.status || 'مطور مواقع';
+            
+            document.getElementById('userName').textContent = displayName;
+            document.querySelector('.user-status').textContent = status;
+            updateUserAvatar(currentUser);
+        }
+
+        // Update UI for logged out user
+        function updateUIForLoggedOutUser() {
+            document.getElementById('loginBtnHeader').style.display = 'block';
+            document.getElementById('loggedInContent').style.display = 'none';
+            document.getElementById('userProfile').style.display = 'none';
+            document.getElementById('logoutItem').style.display = 'none';
+            document.getElementById('withdrawItem').style.display = 'none';
+            document.getElementById('emailBtnFloat').style.display = 'none';
+            balance = 0.00;
+        }
+
+        // Open login modal
+        function openLoginModal() {
+            document.getElementById('loginOverlay').classList.add('show');
+            // Ensure form is in login mode
+            showLoginForm();
+        }
+
+        // Close login modal
+        function closeLoginModal() {
+            document.getElementById('loginOverlay').classList.remove('show');
+            document.getElementById('loginForm').reset();
+            // Reset form to login mode
+            showLoginForm();
+            // Clear any error states
+            clearLoginError();
+            clearInputStates();
+            // Clear uploaded image data
+            clearImageUpload();
+        }
+        
+        // Clear all input states
+        function clearInputStates() {
+            const usernameInput = document.getElementById('loginUsername');
+            const passwordInput = document.getElementById('loginPassword');
+            
+            if (usernameInput) {
+                usernameInput.classList.remove('error', 'success');
+            }
+            if (passwordInput) {
+                passwordInput.classList.remove('error', 'success');
+            }
+        }
+
+        // Show register form (converts login form to register)
+        function showRegisterForm() {
+            const form = document.getElementById('loginForm');
+            const formTitle = document.querySelector('.login-title');
+            const formSubtitle = document.querySelector('.login-subtitle');
+            const loginBtn = form.querySelector('.login-btn');
+            const registerBtn = form.querySelector('.register-btn');
+            
+            formTitle.textContent = 'إنشاء حساب جديد';
+            formSubtitle.textContent = 'أنشئ حسابك الآن واستمتع بالموقع';
+            loginBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء الحساب';
+            registerBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> لديك حساب؟ سجل دخولك';
+            registerBtn.onclick = showLoginForm;
+            
+            // Show CAPTCHA for registration
+            document.getElementById('captchaContainer').style.display = 'block';
+            // Show image upload for registration
+            document.getElementById('imageUploadContainer').style.display = 'flex';
+            generateNewCaptcha();
+            captchaVerified = false;
+            
+            // Clear error states when switching forms
+            clearLoginError();
+            clearInputStates();
+            
+            form.onsubmit = handleRegister;
+        }
+
+        // Show login form (converts register form back to login)
+        function showLoginForm() {
+            const form = document.getElementById('loginForm');
+            const formTitle = document.querySelector('.login-title');
+            const formSubtitle = document.querySelector('.login-subtitle');
+            const loginBtn = form.querySelector('.login-btn');
+            const registerBtn = form.querySelector('.register-btn');
+            
+            formTitle.textContent = 'أهلاً وسهلاً';
+            formSubtitle.textContent = 'سجل دخولك للوصول إلى حسابك';
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> تسجيل الدخول';
+            registerBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء حساب جديد';
+            registerBtn.onclick = showRegisterForm;
+            
+            // Hide CAPTCHA for login
+            document.getElementById('captchaContainer').style.display = 'none';
+            // Hide image upload for login
+            document.getElementById('imageUploadContainer').style.display = 'none';
+            captchaVerified = true;
+            
+            // Clear error states when switching forms
+            clearLoginError();
+            clearInputStates();
+            clearImageUpload();
+            
+            form.onsubmit = handleLogin;
+        }
+
+        // Global variable to store uploaded image
+        let uploadedImageData = null;
+
+        // Trigger image upload dialog
+        function triggerImageUpload() {
+            document.getElementById('imageUploadInput').click();
+        }
+
+        // Handle image upload
+        function handleImageUpload(input) {
+            const file = input.files[0];
+            if (file) {
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('حجم الصورة كبير جداً. الحد الأقصى هو 5 ميجابايت.');
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.startsWith('image/')) {
+                    alert('يرجى اختيار ملف صورة صالح.');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    uploadedImageData = imageData;
+                    
+                    // Show preview
+                    const previewImage = document.getElementById('previewImage');
+                    const uploadBtn = document.querySelector('.image-upload-btn');
+                    
+                    previewImage.src = imageData;
+                    previewImage.style.display = 'block';
+                    uploadBtn.classList.add('has-image');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Update user avatar with image or letter
+        function updateUserAvatar(user) {
+            const avatarImg = document.getElementById('userAvatarImg');
+            const avatarText = document.getElementById('userAvatarText');
+            
+            if (user.avatarImage) {
+                avatarImg.src = user.avatarImage;
+                avatarImg.style.display = 'block';
+                avatarText.style.display = 'none';
+            } else {
+                avatarImg.style.display = 'none';
+                avatarText.style.display = 'block';
+                avatarText.textContent = user.username.charAt(0).toUpperCase();
+            }
+        }
+
+        // Clear image upload
+        function clearImageUpload() {
+            uploadedImageData = null;
+            const previewImage = document.getElementById('previewImage');
+            const uploadBtn = document.querySelector('.image-upload-btn');
+            const uploadInput = document.getElementById('imageUploadInput');
+            
+            if (previewImage) {
+                previewImage.style.display = 'none';
+                previewImage.src = '';
+            }
+            
+            if (uploadBtn) {
+                uploadBtn.classList.remove('has-image');
+            }
+            
+            if (uploadInput) {
+                uploadInput.value = '';
+            }
+        }
+
+        // Enhanced error display function
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            const errorText = document.getElementById('errorText');
+            const loginBtn = document.querySelector('.login-btn');
+            
+            errorText.textContent = message;
+            errorDiv.classList.add('show');
+            
+            // Add error styling to button
+            loginBtn.classList.add('error');
+            
+            // Remove error styling after animation
+            setTimeout(() => {
+                loginBtn.classList.remove('error');
+            }, 500);
+            
+            // Hide error message after 5 seconds
+            setTimeout(() => {
+                errorDiv.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Clear error message
+        function clearLoginError() {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.classList.remove('show');
+        }
+        
+        // Add input validation styling
+        function validateInput(inputId, isValid) {
+            const input = document.getElementById(inputId);
+            input.classList.remove('error', 'success');
+            
+            if (isValid) {
+                input.classList.add('success');
+            } else {
+                input.classList.add('error');
+            }
+        }
+        
+        // Handle login form submission
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginBtn = document.querySelector('.login-btn');
+            
+            // Clear previous errors
+            clearLoginError();
+            
+            // Validate inputs
+            const isUsernameValid = username.trim().length >= 1;
+            const isPasswordValid = password.trim().length >= 1;
+            
+            validateInput('loginUsername', isUsernameValid);
+            validateInput('loginPassword', isPasswordValid);
+            
+            if (!isUsernameValid || !isPasswordValid) {
+                showLoginError('يرجى إدخال اسم المستخدم وكلمة المرور بشكل صحيح');
+                return;
+            }
+            
+            // Show loading state
+            loginBtn.classList.add('loading');
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري تسجيل الدخول...';
+            
+            // Simulate login process
+            setTimeout(() => {
+                const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                const user = savedUsers.find(u => u.username === username && u.password === password);
+                
+                // Reset button state
+                loginBtn.classList.remove('loading');
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> تسجيل الدخول';
+                
+                if (user) {
+                    currentUser = user;
+                    isLoggedIn = true;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Add existing user balance if not set
+                    const savedBalance = localStorage.getItem(`balance_${username}`);
+                    if (savedBalance) {
+                        balance = parseFloat(savedBalance);
+                    } else {
+                        balance = 0.00;
+                    }
+                    
+                    // Show success state
+                    validateInput('loginUsername', true);
+                    validateInput('loginPassword', true);
+                    
+                    closeLoginModal();
+                    updateUIForLoggedInUser();
+                    updateBalanceDisplay();
+                    showNotification(`مرحباً بك مرة أخرى ${username}! تم تسجيل الدخول بنجاح`, 'success');
+                } else {
+                    validateInput('loginUsername', false);
+                    validateInput('loginPassword', false);
+                    showLoginError('⚠️ بيانات الدخول غير صحيحة. يرجى التحقق من اسم المستخدم وكلمة المرور والمحاولة مرة أخرى');
+                }
+            }, 1200);
+        }
+
+        // Handle register form submission
+        function handleRegister(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginBtn = document.querySelector('.login-btn');
+            
+            // Clear previous errors
+            clearLoginError();
+            
+            // Validate inputs
+            const isUsernameValid = username.trim().length >= 3;
+            const isPasswordValid = password.trim().length >= 6;
+            
+            validateInput('loginUsername', isUsernameValid);
+            validateInput('loginPassword', isPasswordValid);
+            
+            if (!isUsernameValid || !isPasswordValid) {
+                showLoginError('⚠️ شروط إنشاء الحساب:\n• اسم المستخدم: 3 أحرف على الأقل\n• كلمة المرور: 6 أحرف على الأقل');
+                return;
+            }
+            
+            // Verify CAPTCHA
+            if (!verifyCaptcha()) {
+                showLoginError('⚠️ يرجى حل معادلة التحقق بشكل صحيح للمتابعة');
+                return;
+            }
+            
+            // Show loading state
+            loginBtn.classList.add('loading');
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري إنشاء الحساب...';
+            
+            // Simulate registration process
+            setTimeout(() => {
+                const savedUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+                
+                // Reset button state
+                loginBtn.classList.remove('loading');
+                loginBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء الحساب';
+                
+                if (savedUsers.find(u => u.username === username)) {
+                    validateInput('loginUsername', false);
+                    showLoginError('⚠️ اسم المستخدم مُستخدم بالفعل. يرجى اختيار اسم مستخدم آخر');
+                    return;
+                }
+                
+                const newUser = { 
+                    username, 
+                    password, 
+                    avatarImage: uploadedImageData, 
+                    createdAt: new Date().toISOString() 
+                };
+                savedUsers.push(newUser);
+                localStorage.setItem('registeredUsers', JSON.stringify(savedUsers));
+                
+                currentUser = newUser;
+                isLoggedIn = true;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                // Show success state
+                validateInput('loginUsername', true);
+                validateInput('loginPassword', true);
+                
+                closeLoginModal();
+                showSuccessModal(username, password);
+            }, 1800);
+        }
+
+        // Show success modal
+        function showSuccessModal(username, password) {
+            document.getElementById('generatedUsername').textContent = username;
+            document.getElementById('generatedPassword').textContent = password;
+            document.getElementById('successModal').classList.add('show');
+        }
+
+        // Download credentials as image
+        function downloadAsImage() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = 600;
+            canvas.height = 400;
+            
+            // Background gradient with site colors
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#00d4ff');
+            gradient.addColorStop(1, '#0066cc');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Add subtle pattern overlay
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Title
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 32px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('بيانات تسجيل الدخول', canvas.width / 2, 80);
+            
+            // RE Logo
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('RE', canvas.width / 2, 130);
+            
+            // Logo background circle
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, 115, 30, 0, 2 * Math.PI);
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.fill();
+            
+            // RE Logo text
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('RE', canvas.width / 2, 125);
+            
+            // Credentials box with site colors
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.fillRect(50, 160, canvas.width - 100, 160);
+            
+            // Box border
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(50, 160, canvas.width - 100, 160);
+            
+            // Username
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText('اسم المستخدم:', canvas.width - 80, 200);
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(document.getElementById('generatedUsername').textContent, 80, 200);
+            
+            // Password
+            ctx.fillStyle = '#ffffff';
+            ctx.textAlign = 'right';
+            ctx.fillText('كلمة المرور:', canvas.width - 80, 240);
+            ctx.textAlign = 'left';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(document.getElementById('generatedPassword').textContent, 80, 240);
+            
+            // Decorative elements
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+            ctx.beginPath();
+            ctx.arc(100, 100, 20, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(500, 300, 15, 0, 2 * Math.PI);
+            ctx.fill();
+            
+            // Footer
+            ctx.fillStyle = '#ffffff';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('احتفظ بهذه البيانات في مكان آمن', canvas.width / 2, 360);
+            
+            // Download
+            const link = document.createElement('a');
+            link.download = 'login-credentials.png';
+            link.href = canvas.toDataURL();
+            link.click();
+            
+            showNotification('تم تحميل الصورة بنجاح!', 'success');
+        }
+
+        // Download credentials as text
+        function downloadAsText() {
+            const username = document.getElementById('generatedUsername').textContent;
+            const password = document.getElementById('generatedPassword').textContent;
+            
+            const text = `
+بيانات تسجيل الدخول - موقع أحمد شوقي
+=====================================
+
+اسم المستخدم: ${username}
+كلمة المرور: ${password}
+
+تاريخ الإنشاء: ${new Date().toLocaleDateString('ar-EG')}
+
+احتفظ بهذه البيانات في مكان آمن
+            `;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('تم نسخ البيانات بنجاح!', 'success');
+            }).catch(() => {
+                // Fallback download
+                const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.download = 'login-credentials.txt';
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                showNotification('تم تحميل الملف بنجاح!', 'success');
+            });
+        }
+
+        // Continue to website
+        function continueToWebsite() {
+            document.getElementById('successModal').classList.remove('show');
+            updateUIForLoggedInUser();
+            showNotification('مرحباً بك في موقع أحمد شوقي!', 'success');
+            
+            // Initialize balance for new users
+            balance = 0.00;
+            localStorage.setItem(`balance_${currentUser.username}`, balance.toString());
+            updateBalanceDisplay();
+        }
+
+        // Logout function
+        function logout() {
+            // Save current balance before logout
+            if (currentUser) {
+                localStorage.setItem(`balance_${currentUser.username}`, balance.toString());
+            }
+            
+            currentUser = null;
+            isLoggedIn = false;
+            balance = 0.00;
+            localStorage.removeItem('currentUser');
+            
+            updateUIForLoggedOutUser();
+            
+            // Close menu dropdown
+            const dropdown = document.getElementById('menuDropdown');
+            dropdown.classList.remove('show');
+            document.removeEventListener('click', closeMenuOnOutsideClick);
+            
+            showNotification('تم تسجيل الخروج بنجاح', 'success');
+        }
 
         // Update balance display
         function updateBalanceDisplay() {
             const balanceElement = document.getElementById('balance-amount');
             const currencySymbol = document.getElementById('currency-symbol');
             
-            if (currency === 'EGP') {
-                balanceElement.textContent = balance.toFixed(2);
-                currencySymbol.textContent = 'EGP';
-            } else {
-                balanceElement.textContent = (balance * exchangeRate).toFixed(2);
-                currencySymbol.textContent = 'USD';
+            const displayAmount = currency === 'EGP' ? balance.toFixed(2) : (balance * exchangeRate).toFixed(2);
+            const displayCurrency = currency === 'EGP' ? 'EGP' : 'USD';
+            
+            if (balanceElement) {
+                balanceElement.textContent = displayAmount;
+                currencySymbol.textContent = displayCurrency;
+            }
+            
+            // Save balance to localStorage
+            if (currentUser) {
+                localStorage.setItem(`balance_${currentUser.username}`, balance.toString());
             }
         }
 
@@ -1212,42 +3757,114 @@
             }
         }
 
-        // Share website function
-        function shareWebsite() {
-            const websiteUrl = 'https://ahmedmehleb1.github.io/1/';
+        // Open share modal
+        function openShareModal() {
+            const modal = document.getElementById('shareModal');
+            const referralInfo = document.getElementById('referralInfo');
+            const shareTitle = document.getElementById('shareTitle');
+            const shareDescription = document.getElementById('shareDescription');
+            
+            // Check if user is logged in for referral rewards
+            if (!isLoggedIn) {
+                // For logged-out users: simple share functionality
+                shareTitle.textContent = 'شارك الموقع';
+                shareDescription.textContent = 'انسخ الرابط وشاركه مع أصدقائك';
+                referralInfo.style.display = 'none';
+            } else {
+                // For logged-in users: share with rewards
+                shareTitle.textContent = 'شارك الموقع واربح!';
+                shareDescription.textContent = 'شارك موقع أحمد شوقي مع أصدقائك واحصل على مكافآت مالية رائعة';
+                referralInfo.style.display = 'block';
+            }
+            
+            modal.classList.add('show');
             
             // Close menu dropdown
             const dropdown = document.getElementById('menuDropdown');
             dropdown.classList.remove('show');
             document.removeEventListener('click', closeMenuOnOutsideClick);
+        }
+
+        // Close share modal
+        function closeShareModal() {
+            document.getElementById('shareModal').classList.remove('show');
+        }
+
+        // Copy share URL
+        function copyShareUrl() {
+            const urlInput = document.getElementById('shareUrl');
+            urlInput.select();
+            urlInput.setSelectionRange(0, 99999);
             
-            // Check if Web Share API is supported
-            if (navigator.share) {
-                navigator.share({
-                    title: 'Ahmed Shawky - Programmer & Web Developer',
-                    text: 'Check out Ahmed Shawky\'s portfolio website!',
-                    url: websiteUrl
-                }).then(() => {
-                    showNotification('Website shared successfully!', 'success');
-                }).catch((error) => {
-                    console.log('Error sharing:', error);
-                    fallbackShare(websiteUrl);
-                });
-            } else {
-                // Fallback for browsers that don't support Web Share API
-                fallbackShare(websiteUrl);
+            navigator.clipboard.writeText(urlInput.value).then(() => {
+                showNotification('تم نسخ الرابط بنجاح!', 'success');
+            }).catch(() => {
+                // Fallback
+                document.execCommand('copy');
+                showNotification('تم نسخ الرابط بنجاح!', 'success');
+            });
+        }
+
+        // Share on Facebook
+        function shareOnFacebook() {
+            const url = encodeURIComponent('https://ahmedmehleb1.github.io/1/');
+            const text = encodeURIComponent('شاهد موقع أحمد شوقي الرائع - مبرمج ومطور مواقع موهوب!');
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`, '_blank', 'width=600,height=400');
+            
+            // Only give rewards if user is logged in
+            if (isLoggedIn) {
+                simulateReferralReward();
             }
         }
 
-        // Fallback share function
-        function fallbackShare(url) {
-            // Copy to clipboard
-            navigator.clipboard.writeText(url).then(() => {
-                showNotification('Website link copied to clipboard!', 'success');
-            }).catch(() => {
-                // If clipboard API fails, show the URL in a prompt
-                prompt('Copy this link to share the website:', url);
-            });
+        // Share on Twitter
+        function shareOnTwitter() {
+            const url = encodeURIComponent('https://ahmedmehleb1.github.io/1/');
+            const text = encodeURIComponent('شاهد موقع أحمد شوقي الرائع - مبرمج ومطور مواقع موهوب!');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+            
+            // Only give rewards if user is logged in
+            if (isLoggedIn) {
+                simulateReferralReward();
+            }
+        }
+
+        // Share on WhatsApp
+        function shareOnWhatsApp() {
+            const text = encodeURIComponent('شاهد موقع أحمد شوقي الرائع - مبرمج ومطور مواقع موهوب! https://ahmedmehleb1.github.io/1/');
+            window.open(`https://wa.me/?text=${text}`, '_blank');
+            
+            // Only give rewards if user is logged in
+            if (isLoggedIn) {
+                simulateReferralReward();
+            }
+        }
+
+        // Share on Telegram
+        function shareOnTelegram() {
+            const url = encodeURIComponent('https://ahmedmehleb1.github.io/1/');
+            const text = encodeURIComponent('شاهد موقع أحمد شوقي الرائع - مبرمج ومطور مواقع موهوب!');
+            window.open(`https://t.me/share/url?url=${url}&text=${text}`, '_blank');
+            
+            // Only give rewards if user is logged in
+            if (isLoggedIn) {
+                simulateReferralReward();
+            }
+        }
+
+        // Simulate referral reward (in real app, this would be server-side)
+        function simulateReferralReward() {
+            // Random reward between 1-2 EGP (most commonly 1)
+            const rewards = [1, 1, 1, 1, 2]; // 80% chance for 1 EGP, 20% chance for 2 EGP
+            const reward = rewards[Math.floor(Math.random() * rewards.length)];
+            
+            setTimeout(() => {
+                balance += reward;
+                referralEarnings += reward;
+                updateBalanceDisplay();
+                showNotification(`تم مشاركة الرابط! في حالة تسجيل شخص جديد ستحصل على ${reward} جنيه`, 'success');
+                closeShareModal();
+            }, 1000);
         }
 
         // Initialize countdown timers
@@ -1302,6 +3919,13 @@
 
         // Open withdraw modal
         function openWithdrawModal() {
+            if (!isLoggedIn) {
+                showNotification('يجب تسجيل الدخول أولاً للوصول إلى خدمة السحب!', 'error');
+                setTimeout(() => {
+                    openLoginModal();
+                }, 1500);
+                return;
+            }
             document.getElementById('withdrawModal').style.display = 'block';
             checkWithdrawAmount(); // Check initial amount
             
@@ -1427,6 +4051,13 @@
 
         // Open tasks modal
         function openTasksModal() {
+            if (!isLoggedIn) {
+                showNotification('يجب تسجيل الدخول أولاً للوصول إلى المهام!', 'error');
+                setTimeout(() => {
+                    openLoginModal();
+                }, 1500);
+                return;
+            }
             document.getElementById('tasksModal').style.display = 'block';
         }
 
@@ -1437,21 +4068,210 @@
 
         // Show notification
         function showNotification(message, type = 'info') {
-            const notification = document.getElementById('notification');
-            const messageElement = document.getElementById('notification-message');
+            // Create a temporary notification element
+            const notification = document.createElement('div');
+            notification.className = 'notification show';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 20px;
+                border-radius: 12px;
+                color: white;
+                font-weight: 500;
+                z-index: 10000;
+                max-width: 400px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(10px);
+                animation: slideIn 0.3s ease-out;
+            `;
             
-            messageElement.textContent = message;
-            
+            let icon, background;
             if (type === 'success') {
-                notification.style.background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
+                icon = '<i class="fas fa-check-circle"></i>';
+                background = 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)';
             } else if (type === 'error') {
-                notification.style.background = 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)';
+                icon = '<i class="fas fa-exclamation-triangle"></i>';
+                background = 'linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)';
+            } else {
+                icon = '<i class="fas fa-info-circle"></i>';
+                background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
             }
             
-            notification.classList.add('show');
+            notification.style.background = background;
+            notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    ${icon}
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
             setTimeout(() => {
-                notification.classList.remove('show');
-            }, 4000);
+                notification.style.animation = 'slideOut 0.3s ease-in';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+
+        // Account Edit Modal Functions
+        function openAccountEditModal() {
+            if (!currentUser) return;
+            
+            const modal = document.getElementById('accountEditModal');
+            const editUsername = document.getElementById('editUsername');
+            const editDisplayName = document.getElementById('editDisplayName');
+            const editStatus = document.getElementById('editStatus');
+            const editEmail = document.getElementById('editEmail');
+            const editPassword = document.getElementById('editPassword');
+            const avatarPreview = document.getElementById('avatarPreview');
+            const avatarPreviewImg = document.getElementById('avatarPreviewImg');
+            const avatarPreviewText = document.getElementById('avatarPreviewText');
+            
+            // Load current user data
+            editUsername.value = currentUser.username;
+            editDisplayName.value = currentUser.displayName || currentUser.username;
+            editStatus.value = currentUser.status || 'مطور مواقع';
+            editEmail.value = currentUser.email || '';
+            editPassword.value = '';
+            
+            // Load avatar
+            if (currentUser.avatarImage) {
+                avatarPreviewImg.src = currentUser.avatarImage;
+                avatarPreviewImg.style.display = 'block';
+                avatarPreviewText.style.display = 'none';
+            } else {
+                avatarPreviewImg.style.display = 'none';
+                avatarPreviewText.style.display = 'block';
+                avatarPreviewText.textContent = currentUser.username.charAt(0).toUpperCase();
+            }
+            
+            modal.classList.add('show');
+        }
+
+        function closeAccountEditModal() {
+            const modal = document.getElementById('accountEditModal');
+            modal.classList.remove('show');
+        }
+
+        function selectAvatarImage() {
+            document.getElementById('avatarUpload').click();
+        }
+
+        function handleAvatarUpload(input) {
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                
+                // Check file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    showNotification('حجم الملف كبير جداً. يجب أن يكون أقل من 5 ميجابايت.', 'error');
+                    return;
+                }
+                
+                // Check file type
+                if (!file.type.startsWith('image/')) {
+                    showNotification('يرجى اختيار ملف صورة صالح.', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatarPreviewImg = document.getElementById('avatarPreviewImg');
+                    const avatarPreviewText = document.getElementById('avatarPreviewText');
+                    
+                    avatarPreviewImg.src = e.target.result;
+                    avatarPreviewImg.style.display = 'block';
+                    avatarPreviewText.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function saveAccountChanges(event) {
+            event.preventDefault();
+            
+            const editUsername = document.getElementById('editUsername');
+            const editDisplayName = document.getElementById('editDisplayName');
+            const editStatus = document.getElementById('editStatus');
+            const editEmail = document.getElementById('editEmail');
+            const editPassword = document.getElementById('editPassword');
+            const avatarPreviewImg = document.getElementById('avatarPreviewImg');
+            const saveBtn = document.querySelector('.save-account-btn');
+            
+            // Validate username
+            if (editUsername.value.trim().length < 3) {
+                showNotification('اسم المستخدم يجب أن يكون 3 أحرف على الأقل.', 'error');
+                return;
+            }
+            
+            // Check if username is already taken (if changed)
+            if (editUsername.value !== currentUser.username) {
+                const savedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+                if (savedUsers.find(u => u.username === editUsername.value)) {
+                    showNotification('اسم المستخدم مُستخدم بالفعل.', 'error');
+                    return;
+                }
+            }
+            
+            // Show loading state
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+            saveBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Update current user
+                const oldUsername = currentUser.username;
+                currentUser.username = editUsername.value;
+                currentUser.displayName = editDisplayName.value;
+                currentUser.status = editStatus.value;
+                currentUser.email = editEmail.value;
+                
+                // Update password if provided
+                if (editPassword.value.trim()) {
+                    currentUser.password = editPassword.value;
+                }
+                
+                // Update avatar
+                if (avatarPreviewImg.style.display === 'block') {
+                    currentUser.avatarImage = avatarPreviewImg.src;
+                }
+                
+                // Update in localStorage
+                const savedUsers = JSON.parse(localStorage.getItem('users') || '[]');
+                const userIndex = savedUsers.findIndex(u => u.username === oldUsername);
+                if (userIndex !== -1) {
+                    savedUsers[userIndex] = currentUser;
+                    localStorage.setItem('users', JSON.stringify(savedUsers));
+                }
+                
+                // Update balance storage if username changed
+                if (oldUsername !== currentUser.username) {
+                    const balance = localStorage.getItem(`balance_${oldUsername}`);
+                    if (balance) {
+                        localStorage.setItem(`balance_${currentUser.username}`, balance);
+                        localStorage.removeItem(`balance_${oldUsername}`);
+                    }
+                }
+                
+                // Update UI
+                updateUserInterface();
+                
+                // Reset button state
+                saveBtn.innerHTML = '<i class="fas fa-save"></i> حفظ التغييرات';
+                saveBtn.disabled = false;
+                
+                showNotification('تم حفظ التغييرات بنجاح!', 'success');
+                closeAccountEditModal();
+            }, 1000);
+        }
+
+        // Open Instagram post
+        function openInstagramPost(url) {
+            window.open(url, '_blank');
         }
 
         // Close modals when clicking outside
@@ -1459,6 +4279,8 @@
             const withdrawModal = document.getElementById('withdrawModal');
             const emailModal = document.getElementById('emailModal');
             const tasksModal = document.getElementById('tasksModal');
+            const shareModal = document.getElementById('shareModal');
+            const accountEditModal = document.getElementById('accountEditModal');
             
             if (event.target == withdrawModal) {
                 closeWithdrawModal();
@@ -1468,6 +4290,12 @@
             }
             if (event.target == tasksModal) {
                 closeTasksModal();
+            }
+            if (event.target == shareModal) {
+                closeShareModal();
+            }
+            if (event.target == accountEditModal) {
+                closeAccountEditModal();
             }
         }
 
@@ -1498,6 +4326,112 @@
                 });
             });
         });
+
+        // Welcome Messages Functions
+        function showWelcomeMessages() {
+            document.getElementById('welcomeOverlay').classList.add('show');
+            updateWelcomeMessage();
+        }
+
+        function updateWelcomeMessage() {
+            const message = welcomeMessages[currentWelcomeMessage];
+            
+            document.getElementById('welcome-icon').className = message.icon;
+            document.getElementById('welcome-title').textContent = message.title;
+            document.getElementById('welcome-message').innerHTML = `<p>${message.message}</p>`;
+            
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentWelcomeMessage);
+            });
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = currentWelcomeMessage === 0;
+            document.getElementById('nextBtn').disabled = currentWelcomeMessage === welcomeMessages.length - 1;
+            
+            // Update action button
+            const actionBtn = document.getElementById('actionBtn');
+            if (currentWelcomeMessage === welcomeMessages.length - 1) {
+                actionBtn.textContent = 'ابدأ الآن';
+                actionBtn.className = 'welcome-btn btn-start';
+                actionBtn.onclick = startExploring;
+            } else {
+                actionBtn.textContent = 'التالي';
+                actionBtn.className = 'welcome-btn btn-next';
+                actionBtn.onclick = nextMessage;
+            }
+        }
+
+        function nextMessage() {
+            if (currentWelcomeMessage < welcomeMessages.length - 1) {
+                currentWelcomeMessage++;
+                updateWelcomeMessage();
+            }
+        }
+
+        function previousMessage() {
+            if (currentWelcomeMessage > 0) {
+                currentWelcomeMessage--;
+                updateWelcomeMessage();
+            }
+        }
+
+        function goToMessage(index) {
+            currentWelcomeMessage = index;
+            updateWelcomeMessage();
+        }
+
+        function skipWelcome() {
+            closeWelcomeMessages();
+        }
+
+        function startExploring() {
+            closeWelcomeMessages();
+        }
+
+        function closeWelcomeMessages() {
+            document.getElementById('welcomeOverlay').classList.remove('show');
+            localStorage.setItem('welcomeShown', 'true');
+        }
+
+        // CAPTCHA Functions
+        function generateNewCaptcha() {
+            currentCaptcha.num1 = Math.floor(Math.random() * 10) + 1;
+            currentCaptcha.num2 = Math.floor(Math.random() * 10) + 1;
+            currentCaptcha.answer = currentCaptcha.num1 + currentCaptcha.num2;
+            
+            document.getElementById('captchaQuestion').textContent = `${currentCaptcha.num1} + ${currentCaptcha.num2} = ؟`;
+            document.getElementById('captchaInput').value = '';
+            document.getElementById('captchaStatus').style.display = 'none';
+            captchaVerified = false;
+            
+            // Add input listener for real-time verification
+            const captchaInput = document.getElementById('captchaInput');
+            captchaInput.oninput = function() {
+                const userAnswer = parseInt(this.value);
+                const statusElement = document.getElementById('captchaStatus');
+                
+                if (userAnswer === currentCaptcha.answer) {
+                    statusElement.textContent = '✓ صحيح! تم التحقق بنجاح';
+                    statusElement.className = 'captcha-status success';
+                    statusElement.style.display = 'block';
+                    captchaVerified = true;
+                } else if (this.value !== '') {
+                    statusElement.textContent = '✗ خطأ، حاول مرة أخرى';
+                    statusElement.className = 'captcha-status error';
+                    statusElement.style.display = 'block';
+                    captchaVerified = false;
+                } else {
+                    statusElement.style.display = 'none';
+                    captchaVerified = false;
+                }
+            };
+        }
+        
+        function verifyCaptcha() {
+            const userAnswer = parseInt(document.getElementById('captchaInput').value);
+            return userAnswer === currentCaptcha.answer && captchaVerified;
+        }
 
         // Add loading animation to buttons
         document.querySelectorAll('.btn').forEach(button => {
